@@ -1,0 +1,153 @@
+from pathlib import Path
+
+from app.services.audio_service import extract_audio
+from app.services.transcription_service import transcribe_audio
+from app.services.status_service import set_status
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+UPLOAD_DIR = PROJECT_ROOT / "uploads"
+AUDIO_DIR = PROJECT_ROOT / "audio"
+TRANSCRIPT_DIR = PROJECT_ROOT / "transcripts"
+
+
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+TRANSCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def process_video(video_id: str, video_path: str):
+
+    try:
+
+        # ==========================================
+        # UPLOADED
+        # ==========================================
+
+        set_status(
+            video_id,
+            "uploaded",
+            10,
+            "Video uploaded successfully."
+        )
+
+
+        # ==========================================
+        # EXTRACTING AUDIO
+        # ==========================================
+
+        set_status(
+            video_id,
+            "extracting_audio",
+            25,
+            "Extracting audio from video..."
+        )
+
+
+        audio_path = (
+            AUDIO_DIR /
+            f"{video_id}.wav"
+        )
+
+
+        extract_audio(
+            video_path,
+            str(audio_path)
+        )
+
+
+        # ==========================================
+        # AUDIO EXTRACTED
+        # ==========================================
+
+        set_status(
+            video_id,
+            "audio_extracted",
+            40,
+            "Audio extraction completed."
+        )
+
+
+        # ==========================================
+        # TRANSCRIBING
+        # ==========================================
+
+        set_status(
+            video_id,
+            "transcribing",
+            50,
+            "Whisper is starting transcription..."
+        )
+
+
+        transcript_path = (
+            TRANSCRIPT_DIR /
+            f"{video_id}.json"
+        )
+
+
+        # ==========================================
+        # WHISPER PROGRESS CALLBACK
+        # ==========================================
+
+        def update_transcription_progress(
+            progress: int,
+            message: str
+        ):
+
+            set_status(
+                video_id,
+                "transcribing",
+                progress,
+                message
+            )
+
+
+        # ==========================================
+        # START WHISPER
+        # ==========================================
+
+        transcribe_audio(
+            str(audio_path),
+            str(transcript_path),
+            progress_callback=update_transcription_progress
+        )
+
+
+        # ==========================================
+        # COMPLETED
+        # ==========================================
+
+        set_status(
+            video_id,
+            "completed",
+            100,
+            "Video processing completed successfully."
+        )
+
+
+        print()
+        print("===================================")
+        print("VIDEO PROCESSING COMPLETED")
+        print("===================================")
+        print()
+
+
+    except Exception as e:
+
+        # ==========================================
+        # ERROR
+        # ==========================================
+
+        print(
+            f"Processing failed: {str(e)}"
+        )
+
+
+        set_status(
+            video_id,
+            "failed",
+            0,
+            f"Processing failed: {str(e)}"
+        )

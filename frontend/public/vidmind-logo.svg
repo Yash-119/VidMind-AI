@@ -1,0 +1,29 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190">
+  <g fill="#000000">
+    <!-- Film-strip icon -->
+    <path d="M12 12 Q12 4 22 4 H65 Q75 4 79 15 L130 158 Q134 169 122 173 H81 Q71 173 67 162 Z"/>
+    <path d="M32 24 L50 24 L59 42 L41 42 Z" fill="#ffffff"/>
+    <path d="M49 65 L67 65 L76 83 L58 83 Z" fill="#ffffff"/>
+    <path d="M66 106 L84 106 L93 124 L75 124 Z" fill="#ffffff"/>
+    <path d="M83 146 L101 146 L108 160 L90 160 Z" fill="#ffffff"/>
+
+    <!-- Play / V mark -->
+    <path d="M94 12 Q94 4 104 10 L169 52 Q178 58 169 66 L112 112 Q102 120 99 108 Z"/>
+    <path d="M145 86 L182 60 Q192 54 198 64 L153 151 Q148 161 142 150 L129 126 Z"/>
+
+    <!-- Brand name -->
+    <text x="220" y="102"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="108"
+      font-weight="700"
+      letter-spacing="-4">VidMind</text>
+
+    <!-- Tagline: enlarged -->
+    <text x="224" y="160"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="34"
+      font-weight="500"
+      letter-spacing="5">AI VIDEO INTELLIGENCE</text>
+  </g>
+</svg>

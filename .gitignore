@@ -1,0 +1,55 @@
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.env
+.env.*
+!.env.example
+
+# Frontend
+node_modules/
+dist/
+
+# Uploaded videos and generated files
+uploads/
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+
+# Databases and vector storage
+chroma_db/
+*.db
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+
+# AI model downloads
+models/
+
+# Chroma vector database
+vector_db/
+
+# Runtime data
+backend/uploads/
+backend/chroma_db/
+
+chatgpt-vidai.txt
+
+# Generated video processing data
+backend/chunks/
+backend/transcripts/
+backend/uploads/
+
+# Generated audio
+backend/audio/
+
+# Unnecessary files
+backend/curl
+frontend/src.zip
+frontend/URL.revokeObjectURL(url)
